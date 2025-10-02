@@ -4,7 +4,7 @@ const utils = require('@iobroker/adapter-core');
 const helper = require('./lib/adapterHelper');
 const objects = require('./lib/adapterObjects');
 const Queue = require('./lib/adapterQueue');
-const Switchbot = require('node-switchbot').SwitchBotBLE;
+const { SwitchBotBLE } = require('node-switchbot');
 
 class SwitchbotBle extends utils.Adapter {
     constructor(options) {
@@ -63,7 +63,7 @@ class SwitchbotBle extends utils.Adapter {
         this.log.info(`Set the NOBLE_HCI_DEVICE_ID environment variable to ${this.hciDeviceId} (hci${this.hciDeviceId})`);
         process.env.NOBLE_HCI_DEVICE_ID = this.hciDeviceId;
 
-        this.switchbot = new Switchbot();
+        this.switchbot = new SwitchBotBLE();
 
         this.scanDevicesInterval = setInterval(() => {
             (async () => {
